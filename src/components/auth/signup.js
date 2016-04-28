@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { reduxForm} from 'redux-form';
 import * as actions from '../../actions';
+import { Link } from 'react-router';
 
 class Signup extends Component {
   handleFormSubmit({email, password}) {
@@ -36,6 +37,7 @@ class Signup extends Component {
         </fieldset>
         {this.renderAlert()}
         <button action="submit" className="btn btn-primary">Sign Up</button>
+        <Link className="nav-link" to="/signin">Login Here</Link>
       </form>
     );
   }

@@ -51,11 +51,19 @@ export function fetchComments() {
     axios.get(`${ROOT_URL}/comments`, 
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
-      .then(response => {
-        dispatch({
-          type: FETCH_MESSAGE,
-          payload: response.data.message
-        });
-      });
+    .then(response => {
+      console.log(response.data);
+    });
+  }
+}
+
+export function postComment({ comment, email}) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/comments`,{ comment, email }, 
+      { headers: { authorization: localStorage.getItem('betterco.token') }
+    })
+    .then(response => {
+      console.log(response.data);
+    });
   }
 }

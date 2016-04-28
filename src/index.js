@@ -9,16 +9,15 @@ import App from './components/app';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
-import Comments from './components/comments';
+import CommentList from './components/comment_list';
 import RequireAuth from './components/auth/require_auth';
-import Welcome from './components/welcome';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem('betterco.token');
 
 if (token) {
   store.dispatch({ type: AUTH_USER });
@@ -28,11 +27,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Welcome}></IndexRoute>
+        <IndexRoute component={Signin}></IndexRoute>
         <Route path="signin" component={Signin}></Route>
         <Route path="signout" component={Signout}></Route>
         <Route path="signup" component={Signup}></Route>
-        <Route path="comments" component={RequireAuth(Comments)}></Route>
+        <Route path="comments" component={RequireAuth(CommentList)}></Route>
       </Route>
     </Router>
   </Provider>

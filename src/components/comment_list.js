@@ -2,20 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-class Comments extends Component {
+class CommentList extends Component {
   componentWillMount() {
     this.props.fetchComments();  
   }
 
   render() {
     return (
-      <div>{this.props.message}</div>
+      <div>comment list will go here</div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return { message: state.auth.message}
-}
-
-export default connect(mapStateToProps, actions)(Comments);
+export default connect(null, actions)(CommentList);
