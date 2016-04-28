@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_COMMENTS } from './types';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -22,9 +22,10 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/signin`, {email, password})
     .then(response => {
+      console.log(response);
       dispatch({ type: AUTH_USER });
+      localStorage.setItem('betterco.token', response.data.token);
       browserHistory.push('/comments');
-      localStorage.setItem('token', response.data.token);
     })
     .catch(() => {
       dispatch(authError('bad login info'));
@@ -47,12 +48,15 @@ export function signoutUser() {
 }
 
 export function fetchComments() {
-  return function(dispatch) {
+  return function(dispatch) { 
     axios.get(`${ROOT_URL}/comments`, 
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
     .then(response => {
-      console.log(response.data);
+      dispatch({
+        type: FETCH_COMMENTS,
+        payload: response.data.data
+      });
     });
   }
 }

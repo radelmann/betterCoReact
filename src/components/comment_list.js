@@ -7,11 +7,33 @@ class CommentList extends Component {
     this.props.fetchComments();  
   }
 
+  renderList() {
+    return this.props.comments.map((comment, i)=> {
+      return (
+       <li className="list-group-item" key={i}>
+        <div>{comment.email}</div>
+        <div>{comment.message}</div>
+      </li>
+      );
+    })
+  }
+
   render() {
     return (
-      <div>comment list will go here</div>
+      <div>
+        <ul className="list-group">
+          {this.renderList()}
+        </ul>
+      </div>
     );
   }
 }
 
-export default connect(null, actions)(CommentList);
+function mapStateToProps(state) {
+  // console.log(state.comments.all);
+  return {
+    comments: state.comments.all
+  };
+}
+
+export default connect(mapStateToProps, actions)(CommentList);
