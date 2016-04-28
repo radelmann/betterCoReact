@@ -10,7 +10,7 @@ export function signupUser({ email, password }) {
     .then(response => {
       dispatch({ type: AUTH_USER });
       browserHistory.push('/comments');
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('betterco.token', response.data.token);
     })
     .catch(response => {
       dispatch(authError(response.data.error));
@@ -49,7 +49,7 @@ export function signoutUser() {
 export function fetchComments() {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/comments`, 
-      { headers: { authorization: localStorage.getItem('token') }
+      { headers: { authorization: localStorage.getItem('betterco.token') }
     })
       .then(response => {
         dispatch({
