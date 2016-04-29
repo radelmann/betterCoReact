@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_COMMENTS, POST_COMMENT } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_COMMENTS, POST_COMMENT, SHOW_MODAL, HIDE_MODAL } from './types';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -22,7 +22,6 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/signin`, {email, password})
     .then(response => {
-      console.log(response);
       dispatch({ type: AUTH_USER });
       localStorage.setItem('betterco.token', response.data.token);
       browserHistory.push('/comments');
@@ -53,7 +52,6 @@ export function fetchComments() {
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
     .then(response => {
-      console.log(response.data.data);
       dispatch({
         type: FETCH_COMMENTS,
         payload: response.data.data
@@ -68,12 +66,22 @@ export function postComment({ message }) {
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
     .then(response => {
-      console.log(response.data); 
-      //add a new comment to comments reducer 
       dispatch({
         type: POST_COMMENT,
         payload: response.data
       });
     });
+  }
+}
+
+export function showModal() {
+  return {
+    type: SHOW_MODAL
+  }
+}
+
+export function hideModal() {
+  return {
+    type: HIDE_MODAL
   }
 }

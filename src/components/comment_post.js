@@ -1,15 +1,36 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { postComment } from '../actions/index';
+import { postComment, showModal, hideModal } from '../actions/index';
 import { Link } from 'react-router';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class CommentPost extends Component {
-  //context from react-router
-  // static contextTypes = {
-  //   router: PropTypes.object
-  // };
+  openModal() {
+    this.props.showModal();
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.refs.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.props.hideModal();
+  }
 
   onSubmit(props) {
+    this.props.hideModal();
     this.props.postComment(props);
   }
 
@@ -22,22 +43,31 @@ class CommentPost extends Component {
   }
 
   render() {
-    const { fields: {message}, handleSubmit } = this.props;
+    const { fields: {message}, handleSubmit, modal } = this.props;
 
     return (
-      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-        <h3>Post a new comment</h3>
+      <div>
+        <button onClick={this.openModal.bind(this)}>Open Modal</button>
+        <Modal
+          isOpen={modal}
+          onAfterOpen={this.afterOpenModal.bind(this)}
+          onRequestClose={this.closeModal.bind(this)}
+          style={customStyles} >
 
-          <div className={this.getFieldClass(message)}>
-            <label>Message</label>
-            <textarea className="form-control" {...message}/>
-            <div className="text-help">
-              {this.getFieldError(message)}
-            </div>
-          </div>
-
-          <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+          <button onClick={this.closeModal.bind(this)}>close</button>
+          <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+            <h3>Post a new comment</h3>
+              <div className={this.getFieldClass(message)}>
+                <label>Message</label>
+                <textarea className="form-control" {...message}/>
+                <div className="text-help">
+                  {this.getFieldError(message)}
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        </Modal>
+      </div>
     );
   }
 }
@@ -52,10 +82,14 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps(state) {
+  return { modal: state.modal };
+}
+
 // connect first arg is mapStateToProps, 2nd is mapDispatchtoProps
 // reduxForm: 1st arg is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
 export default reduxForm({
   form: 'CommentPostForm',
   fields: ['message'],
-  validate
-},null,{postComment})(CommentPost);
+  validate,
+},mapStateToProps,{postComment, showModal, hideModal})(CommentPost);
