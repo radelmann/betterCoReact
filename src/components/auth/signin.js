@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import { Link } from 'react-router';
 
-
 class Signin extends Component {
   handleFormSubmit({email, password}) {
     this.props.signinUser({email,password});
@@ -20,19 +19,21 @@ class Signin extends Component {
   render() {
     const { handleSubmit, fields: {email, password} } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className="form-group">
-          <label>Email</label>
-          <input {...email} className="form-control" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password</label>
-          <input {...password} type="password" className="form-control" />
-        </fieldset>
-        {this.renderAlert()}
-        <button action="submit" className="btn btn-primary">Sign In</button>
-        <Link className="nav-link" to="/signup">Create an Account</Link>
-      </form>
+      <div className="container form center">
+        <h1 className="white">Triangle</h1>
+        <p className="white">Chat with interesting people in your city</p>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          {this.renderAlert()}
+          <fieldset className="form-group">
+            <input {...email} className="form-control" placeholder="email" />
+            <input {...password} type="password" className="form-control" placeholder="password" />
+          </fieldset>
+          <button action="submit" className="btn btn-primary">Sign In</button>
+        </form>
+        <p>
+          <Link to="/signup">Create an Account</Link>
+        </p>
+      </div>
     );
   }
 }

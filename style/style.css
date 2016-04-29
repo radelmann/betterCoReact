@@ -1,3 +1,156 @@
+@font-face {
+    font-family: bc-reg;
+    src: url(../assets/quicksand/Quicksand-Regular.otf);
+}
+
+@font-face {
+    font-family: bc-bold;
+    src: url(../assets/quicksand/Quicksand-Bold.otf);
+}
+
+body {
+  font-family: bc-reg;
+  background-image: url('../assets/img_background@2x.jpg');
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+h1 {
+  font-family: bc-bold;
+}
+
+p { 
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+a {
+  color:#FFF;
+  font-family: bc-bold; 
+}
+
+a:hover {
+  color:#FFF;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+form {
+  background-color: transparent;
+}
+
+.font-bold {
+  font-family: bc-bold;
+}
+
+.container {
+  max-width:500px;
+}
+
+.center {
+  text-align: center;
+}
+
+.comments {
+  margin:5px;
+}
+
+.comment {
+  background-color: #FFF;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding:5px;
+  border: #DDD thin solid;
+  border-radius: 5px;
+}
+
+.form {
+  margin-top: 5%;
+  padding: 5px;
+}
+
+.form-control {
+  margin-bottom:10px;
+  border:none;
+}
+
+.btn-primary {
+  width:100%;
+  background-color: #A18DFF;
+}
+
+.btn-primary:hover {
+  width:100%;
+  background-color: #A18DFF;
+}
+
+.compose-button-container {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+}
+
+.compose-button {
+  background: url(../assets/btn_compose@2x.png) no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  border: none;
+  width: 100px;
+  height: 100px;
+  margin:auto;
+}
+
+.white {
+  color:#FFF;
+}
+
+.grey {
+  color:#8d8a86;
+}
+
+.message {
+  margin-top: 8px;
+}
+
+.modal-dialog {
+  max-width: 450px;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-body {
+  padding:10px;
+}
+
+.modal-footer {
+  padding:10px;
+  padding-top:0px;
+  border-top: none;
+}
+
+.form-group {
+  background-color: #FFF;
+  border:thin solid #FFF;
+  border-radius: 5px;
+}
+
+.fa-arrow-left {
+  font-size: 26px;
+}
+
 .error {
   color:red;
+}
+
+ul {
+  padding-left:0px;
 }

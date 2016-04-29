@@ -41,7 +41,8 @@ class CommentPost extends Component {
     const { fields: {message}, handleSubmit, modal } = this.props;
 
     return (
-      <div>
+      <div className="container">
+        <div className="row">
         <Modal
           isOpen={modal}
           onRequestClose={this.closeModal.bind(this)}
@@ -57,7 +58,8 @@ class CommentPost extends Component {
               <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </Modal>
-        <button onClick={this.openModal.bind(this)}>Open Modal</button>
+        </div>
+        <div className="compose-button" onClick={this.openModal.bind(this)}></div>
       </div>
     );
   }

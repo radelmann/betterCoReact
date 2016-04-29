@@ -13,9 +13,9 @@ class CommentList extends Component {
   renderList() {
     return this.props.comments.map((comment, i) => {
       return (
-        <li className="list-group-item" key={i}>
-          <div>{comment.email}</div>
-          <div>{comment.message}</div>
+        <li className="comment" key={i}>
+          <div className="font-bold">{comment.email}</div>
+          <div className="message grey">{comment.message}</div>
         </li>
       );
     })
@@ -23,12 +23,16 @@ class CommentList extends Component {
 
   render() {
     return (
-      <div>
-        <a onClick={this.props.signoutUser}>Sign Out</a>
-        <ul className="list-group">
-          {this.renderList()}
-        </ul>
-        <PostComment></PostComment>
+      <div className="container">
+        <div className="row">
+          <div className="comments">
+            <a onClick={this.props.signoutUser}><span className="fa fa-arrow-left white"></span></a>
+            <ul>
+              {this.renderList()}
+            </ul>
+            <PostComment></PostComment>
+          </div>
+        </div>
       </div>
     );
   }
