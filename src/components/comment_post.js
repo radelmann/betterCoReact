@@ -41,25 +41,27 @@ class CommentPost extends Component {
     const { fields: {message}, handleSubmit, modal } = this.props;
 
     return (
-      <div className="container">
-        <div className="row">
-        <Modal
-          isOpen={modal}
-          onRequestClose={this.closeModal.bind(this)}
-          style={customStyles} >
-          <button onClick={this.closeModal.bind(this)}>close</button>
-          <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-              <div className={this.getFieldClass(message)}>
-                <textarea className="form-control" {...message}/>
-                <div className="text-help">
-                  {this.getFieldError(message)}
+      <div>
+        <div>
+          <Modal
+            isOpen={modal}
+            onRequestClose={this.closeModal.bind(this)}
+            style={customStyles} >
+            <button onClick={this.closeModal.bind(this)}>close</button>
+            <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+                <div className={this.getFieldClass(message)}>
+                  <textarea className="form-control" {...message}/>
+                  <div className="text-help">
+                    {this.getFieldError(message)}
+                  </div>
                 </div>
-              </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
-          </form>
-        </Modal>
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+          </Modal>
         </div>
-        <div className="compose-button" onClick={this.openModal.bind(this)}></div>
+        <div className="compose-button-container">  
+          <div className="compose-button" onClick={this.openModal.bind(this)}></div>
+        </div>
       </div>
     );
   }

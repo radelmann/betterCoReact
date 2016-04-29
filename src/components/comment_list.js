@@ -23,16 +23,16 @@ class CommentList extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
+      <div>
+        <div className="container">
           <div className="comments">
             <a onClick={this.props.signoutUser}><span className="fa fa-arrow-left white"></span></a>
             <ul>
               {this.renderList()}
             </ul>
-            <PostComment></PostComment>
           </div>
         </div>
+        <PostComment></PostComment>
       </div>
     );
   }

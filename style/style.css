@@ -50,8 +50,13 @@ form {
   font-family: bc-bold;
 }
 
+.mycontainer {
+  width:100%;
+}
 .container {
   max-width:500px;
+  margin-left: auto;
+  margin-right:auto;
 }
 
 .center {
