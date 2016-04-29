@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_COMMENTS, POST_COMMENT, SHOW_MODAL, HIDE_MODAL } from './types';
+import {reset} from 'redux-form';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -60,6 +61,12 @@ export function fetchComments() {
         payload: response.data.data
       });
     });
+  }
+}
+
+export function resetForm(formName) {
+  return function(dispatch) { 
+    dispatch(reset(formName));  
   }
 }
 

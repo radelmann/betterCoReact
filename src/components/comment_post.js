@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { postComment, showModal, hideModal } from '../actions/index';
+import { postComment, showModal, hideModal, resetForm } from '../actions/index';
 import { Link } from 'react-router';
 import Modal from 'react-modal';
 
@@ -16,10 +16,12 @@ const customStyles = {
 
 class CommentPost extends Component {
   openModal() {
+    this.props.resetForm('CommentPostForm');
     this.props.showModal();
   }
 
   closeModal() {
+    this.props.resetForm('CommentPostForm');
     this.props.hideModal();
   }
 
@@ -76,4 +78,4 @@ export default reduxForm({
   form: 'CommentPostForm',
   fields: ['message'],
   validate,
-},mapStateToProps,{postComment, showModal, hideModal})(CommentPost);
+},mapStateToProps,{postComment, showModal, hideModal, resetForm})(CommentPost);
