@@ -1,13 +1,15 @@
-import { FETCH_COMMENTS } from '../actions/types';
+import { FETCH_COMMENTS, POST_COMMENT } from '../actions/types';
 
-const INITIAL_STATE = {
-  all: []
-};
+// const INITIAL_STATE = {
+//   all: []
+// };
 
-export default function(state = INITIAL_STATE, action) {
+export default function(state = [], action) {
   switch(action.type) {
     case FETCH_COMMENTS:
-      return { ...state, all: action.payload};
+      return action.payload;
+    case POST_COMMENT:
+      return [ ...state, action.payload];
     default:
       return state;
   }

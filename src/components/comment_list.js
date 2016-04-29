@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import PostComment from './comment_post'
 
 class CommentList extends Component {
   componentWillMount() {
@@ -10,10 +11,10 @@ class CommentList extends Component {
   renderList() {
     return this.props.comments.map((comment, i)=> {
       return (
-       <li className="list-group-item" key={i}>
-        <div>{comment.email}</div>
-        <div>{comment.message}</div>
-      </li>
+        <li className="list-group-item" key={i}>
+          <div>{comment.email}</div>
+          <div>{comment.message}</div>
+        </li>
       );
     })
   }
@@ -24,15 +25,15 @@ class CommentList extends Component {
         <ul className="list-group">
           {this.renderList()}
         </ul>
+        <PostComment></PostComment>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  // console.log(state.comments.all);
   return {
-    comments: state.comments.all
+    comments: state.comments
   };
 }
 

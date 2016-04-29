@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_COMMENTS } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_COMMENTS, POST_COMMENT } from './types';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -43,7 +43,7 @@ export function authError(error) {
 export function signoutUser() {
   localStorage.removeItem('token');
   return {
-    type:UNAUTH_USER
+    type: UNAUTH_USER
   }
 }
 
@@ -53,6 +53,7 @@ export function fetchComments() {
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
     .then(response => {
+      console.log(response.data.data);
       dispatch({
         type: FETCH_COMMENTS,
         payload: response.data.data
@@ -61,13 +62,18 @@ export function fetchComments() {
   }
 }
 
-export function postComment({ comment, email}) {
+export function postComment({ message }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/comments`,{ comment, email }, 
+    axios.post(`${ROOT_URL}/comment`,{ message, email:'xxx@test.com' }, 
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
     .then(response => {
-      console.log(response.data);
+      console.log(response.data); 
+      //add a new comment to comments reducer 
+      dispatch({
+        type: POST_COMMENT,
+        payload: response.data
+      });
     });
   }
 }
