@@ -27,7 +27,7 @@ export function signinUser({ email, password }) {
       browserHistory.push('/comments');
     })
     .catch(() => {
-      dispatch(authError('bad login info'));
+      dispatch(authError('Incorrect login information'));
     });
   }
 }

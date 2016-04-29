@@ -7,7 +7,6 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
 import Signin from './components/auth/signin';
-import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
 import CommentList from './components/comment_list';
 import RequireAuth from './components/auth/require_auth';
@@ -29,7 +28,6 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Signin}></IndexRoute>
         <Route path="signin" component={Signin}></Route>
-        <Route path="signout" component={Signout}></Route>
         <Route path="signup" component={Signup}></Route>
         <Route path="comments" component={RequireAuth(CommentList)}></Route>
       </Route>

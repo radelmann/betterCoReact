@@ -52,9 +52,7 @@ class CommentPost extends Component {
             <form className="post-form" onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
                 <div className={this.getFieldClass(message)}>
                   <textarea className="form-control" {...message} rows="5" placeholder="what do you want to say?"/>
-                  <div className="text-help">
-                    {this.getFieldError(message)}
-                  </div>
+                  { message.touched && message.error && <div className="error">{message.error}</div> }
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

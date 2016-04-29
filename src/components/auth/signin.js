@@ -4,6 +4,9 @@ import * as actions from '../../actions';
 import { Link } from 'react-router';
 
 class Signin extends Component {
+  componentDidMount() {
+    this.props.authError('');  
+  }
   handleFormSubmit({email, password}) {
     this.props.signinUser({email,password});
   }
@@ -26,7 +29,9 @@ class Signin extends Component {
           {this.renderAlert()}
           <fieldset className="form-group">
             <input {...email} className="form-control" placeholder="email" />
+            { email.touched && email.error && <div className="error">{email.error}</div> }
             <input {...password} type="password" className="form-control" placeholder="password" />
+            { password.touched && password.error && <div className="error">{password.error}</div> }
           </fieldset>
           <button action="submit" className="btn btn-primary">Sign In</button>
         </form>
@@ -38,11 +43,26 @@ class Signin extends Component {
   }
 }
 
+function validate(formProps) {
+  const errors = {};
+
+  if (!formProps.email) {
+    errors.email = 'Please enter an email.';  
+  }
+
+  if (!formProps.password) {
+    errors.password = 'Please enter a password.';  
+  }
+
+  return errors;
+}
+
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
 export default reduxForm({
   form:'signin',
-  fields: ['email','password']
+  fields: ['email','password'],
+  validate,
 }, mapStateToProps, actions)(Signin);

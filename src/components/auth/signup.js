@@ -4,6 +4,9 @@ import * as actions from '../../actions';
 import { Link } from 'react-router';
 
 class Signup extends Component {
+  componentDidMount() {
+    this.props.authError('');  
+  }
   handleFormSubmit({email, password}) {
     this.props.signupUser({email,password});
   }
@@ -22,6 +25,7 @@ class Signup extends Component {
       <div id='signup' className="container form center">
         <h1 className="white">Create an Account</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          {this.renderAlert()}
           <fieldset className="form-group">
             <input  className="form-control" {...email} placeholder="email" />
             { email.touched && email.error && <div className="error">{email.error}</div> }
@@ -30,7 +34,6 @@ class Signup extends Component {
             <input className="form-control" {...passwordConfirm} type="password" placeholder="password confirm" />
             { passwordConfirm.touched && passwordConfirm.error && <div className="error">{passwordConfirm.error}</div> }
           </fieldset>
-          {this.renderAlert()}
           <button action="submit" className="btn btn-primary">Sign Up</button>
           <p>
             <Link to="/signin">Sign In Here</Link>
