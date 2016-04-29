@@ -5,13 +5,12 @@ import { Link } from 'react-router';
 import Modal from 'react-modal';
 
 const customStyles = {
+  overlay : {
+    backgroundColor : 'rgba(75, 75, 75, .75)'
+  },
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    border : 'none',
+    background  : 'transparent'
   }
 };
 
@@ -47,10 +46,12 @@ class CommentPost extends Component {
             isOpen={modal}
             onRequestClose={this.closeModal.bind(this)}
             style={customStyles} >
-            <button onClick={this.closeModal.bind(this)}>close</button>
-            <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+            <div className="close-form-container">
+              <button className="transparent align-right" onClick={this.closeModal.bind(this)}>X</button>
+            </div> 
+            <form className="post-form" onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
                 <div className={this.getFieldClass(message)}>
-                  <textarea className="form-control" {...message}/>
+                  <textarea className="form-control" {...message} rows="5" placeholder="what do you want to say?"/>
                   <div className="text-help">
                     {this.getFieldError(message)}
                   </div>

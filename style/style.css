@@ -159,3 +159,55 @@ form {
 ul {
   padding-left:0px;
 }
+
+.transparent {
+  background-color: transparent;
+  border:none;
+}
+
+.close-form-container {
+  max-width:375px;
+  margin-left:auto;
+  margin-right:auto; 
+  text-align: right;
+  font-weight:500;
+}
+
+.post-form {
+  max-width:350px;
+  margin-left:auto;
+  margin-right:auto; 
+}
+
+
+.ReactModal__Overlay {
+  -webkit-perspective: 600;
+  perspective: 600;
+  opacity: 0;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transition: opacity 250ms ease-out;
+}
+
+.ReactModal__Content {
+  -webkit-transform: scale(0.5) rotateX(-30deg);
+  transform: scale(0.5) rotateX(-30deg);
+}
+
+.ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transform: scale(1) rotateX(0deg);
+  transition: all 250ms ease-in;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content--before-close {
+  -webkit-transform: scale(0.5) rotateX(30deg);
+  transform: scale(0.5) rotateX(30deg);
+  transition: all 150ms ease-in;
+}
