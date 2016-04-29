@@ -10,6 +10,7 @@ export function signupUser({ email, password }) {
     .then(response => {
       dispatch({ type: AUTH_USER });
       browserHistory.push('/comments');
+      localStorage.setItem('betterco.email', email);
       localStorage.setItem('betterco.token', response.data.token);
     })
     .catch(response => {
@@ -23,6 +24,7 @@ export function signinUser({ email, password }) {
     axios.post(`${ROOT_URL}/signin`, {email, password})
     .then(response => {
       dispatch({ type: AUTH_USER });
+      localStorage.setItem('betterco.email', email);
       localStorage.setItem('betterco.token', response.data.token);
       browserHistory.push('/comments');
     })
@@ -40,7 +42,8 @@ export function authError(error) {
 }
 
 export function signoutUser() {
-  localStorage.removeItem('token');
+  localStorage.removeItem('betterco.email');
+  localStorage.removeItem('betterco.token');
   return {
     type: UNAUTH_USER
   }
@@ -62,7 +65,7 @@ export function fetchComments() {
 
 export function postComment({ message }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/comment`,{ message, email:'xxx@test.com' }, 
+    axios.post(`${ROOT_URL}/comment`,{ message, email:localStorage.getItem('betterco.email') }, 
       { headers: { authorization: localStorage.getItem('betterco.token') }
     })
     .then(response => {

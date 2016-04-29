@@ -28,14 +28,6 @@ class CommentPost extends Component {
     this.props.postComment(props);
   }
 
-  getFieldClass(field) {
-    return `form-group ${field.touched && field.invalid ? 'has-danger' : ''}`;
-  }
-
-  getFieldError(field) {
-    return field.touched ? field.error : '';
-  }
-
   render() {
     const { fields: {message}, handleSubmit, modal } = this.props;
 
@@ -47,10 +39,10 @@ class CommentPost extends Component {
             onRequestClose={this.closeModal.bind(this)}
             style={customStyles} >
             <div className="close-form-container">
-              <button className="transparent align-right" onClick={this.closeModal.bind(this)}>X</button>
+              <button className="transparent align-right white" onClick={this.closeModal.bind(this)}>X</button>
             </div> 
             <form className="post-form" onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-                <div className={this.getFieldClass(message)}>
+                <div className="form-group">
                   <textarea className="form-control" {...message} rows="5" placeholder="what do you want to say?"/>
                   { message.touched && message.error && <div className="error">{message.error}</div> }
                 </div>
@@ -80,8 +72,6 @@ function mapStateToProps(state) {
   return { modal: state.modal };
 }
 
-// connect first arg is mapStateToProps, 2nd is mapDispatchtoProps
-// reduxForm: 1st arg is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
 export default reduxForm({
   form: 'CommentPostForm',
   fields: ['message'],
