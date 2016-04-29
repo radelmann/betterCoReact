@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import PostComment from './comment_post'
+import PostComment from './comment_post';
+import { Link } from 'react-router';
+
 
 class CommentList extends Component {
   componentWillMount() {
@@ -9,7 +11,7 @@ class CommentList extends Component {
   }
 
   renderList() {
-    return this.props.comments.map((comment, i)=> {
+    return this.props.comments.map((comment, i) => {
       return (
         <li className="list-group-item" key={i}>
           <div>{comment.email}</div>
@@ -22,6 +24,7 @@ class CommentList extends Component {
   render() {
     return (
       <div>
+        <a onClick={this.props.signoutUser}>Sign Out</a>
         <ul className="list-group">
           {this.renderList()}
         </ul>

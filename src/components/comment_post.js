@@ -20,11 +20,6 @@ class CommentPost extends Component {
     this.props.showModal();
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.refs.subtitle.style.color = '#f00';
-  }
-
   closeModal() {
     this.props.hideModal();
   }
@@ -47,18 +42,13 @@ class CommentPost extends Component {
 
     return (
       <div>
-        <button onClick={this.openModal.bind(this)}>Open Modal</button>
         <Modal
           isOpen={modal}
-          onAfterOpen={this.afterOpenModal.bind(this)}
           onRequestClose={this.closeModal.bind(this)}
           style={customStyles} >
-
           <button onClick={this.closeModal.bind(this)}>close</button>
           <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-            <h3>Post a new comment</h3>
               <div className={this.getFieldClass(message)}>
-                <label>Message</label>
                 <textarea className="form-control" {...message}/>
                 <div className="text-help">
                   {this.getFieldError(message)}
@@ -67,6 +57,7 @@ class CommentPost extends Component {
               <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </Modal>
+        <button onClick={this.openModal.bind(this)}>Open Modal</button>
       </div>
     );
   }
@@ -76,7 +67,7 @@ function validate(values) {
   const errors = {};
 
   if (!values.message) {
-    errors.title = 'Enter a message.';
+    errors.message = 'Enter a message.';
   }
 
   return errors;
