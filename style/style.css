@@ -96,6 +96,9 @@ form {
   background-color: #A18DFF;
 }
 
+.btn-primary:focus {
+  background-color: #A18DFF;
+}
 .compose-button-container {
   position: fixed;
   bottom: 50px;
